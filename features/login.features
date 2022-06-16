@@ -1,0 +1,3 @@
+Feature: Login Test
+  Scenario: Successful Login
+    Given Open website "\\w+\.\\w+"

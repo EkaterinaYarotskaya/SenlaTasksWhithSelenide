@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.*;
 class LoginTest extends DataFix {
     private final String loginPageUrl = property.getProperty("loginPageUrl");
     private final static String correctLogin = property.getProperty("correctLogin");
-    private final static String correctPassword = property.getProperty("correctPassword");
+    private final static String correctPassword = property.getProperty("correctPassword1");
     private final String incorrectLogin = property.getProperty("incorrectLogin");
     private final String incorrectPassword = property.getProperty("incorrectPassword");
 
@@ -22,7 +22,7 @@ class LoginTest extends DataFix {
         $("#username").setValue(correctLogin);
         $("#password").setValue(correctPassword).pressEnter();
         $(".example>a").isEnabled();
-        int s = 0;
+
     }
 
     @Test
