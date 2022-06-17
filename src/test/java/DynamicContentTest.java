@@ -17,9 +17,9 @@ public class DynamicContentTest extends DynamicContentPage {
     public void dynamicContentIsPresent() {
         List<String> listBefore = new ArrayList();
         List<String> listAfter = new ArrayList();
-       listBefore= saveContentData();
-       $("p>a[href]").click();
-       listAfter=saveContentData();
+        listBefore = saveContentData();
+        $("p>a[href]").click();
+        listAfter = saveContentData();
     }
 
 }
