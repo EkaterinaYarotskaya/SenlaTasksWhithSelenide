@@ -1,3 +1,5 @@
+import com.codeborne.selenide.commands.ShouldHave;
+import org.assertj.core.error.ShouldBe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
 
@@ -20,6 +22,6 @@ public class DynamicContentTest extends DynamicContentPage {
         listBefore = saveContentData();
         $("p>a[href]").click();
         listAfter = saveContentData();
+        Assertions.assertFalse(listBefore.equals(listAfter));
     }
-
 }
