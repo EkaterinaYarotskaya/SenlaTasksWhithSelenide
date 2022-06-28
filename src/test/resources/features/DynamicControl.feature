@@ -1,17 +1,19 @@
-Feature:  Testing dynamic content on the page
+Feature: check the health of dynamic content on the page
 
-  Scenario: Check box present and clickable
-    When Open website "http://the-internet.herokuapp.com/dynamic_controls"
-    Then Check whether an element is displayed on a web page
-    Then Click on check box
-    Then Check box is selected on the web page
-    Then Click on check box
-    And Check whether an element is displayed on a web page
+  Scenario: check the health of checkbox
+    Given Open website "http://the-internet.herokuapp.com/dynamic_controls"
+    Then Check whether "checkbox" is "displayed" on a web page
+    Then Click on "checkbox"
+    Then Check whether "checkbox" is "selected" on a web page
+    Then Click on "checkbox"
+    Then Check whether "checkbox" is "displayed" on a web page
 
-  Scenario: Check remove/add button
-    When Open website "http://the-internet.herokuapp.com/dynamic_controls"
-    And Check whether an element is displayed on a web page
-    Then Click on remove button
-    Then Check box is hidden on the web page
-    Then Click on add button
-    Then Check box is visible and exist on the web page
+  Scenario: check the health of remove/add button
+    Given Open website "http://the-internet.herokuapp.com/dynamic_controls"
+    Then Click on "remove/add button"
+    Then Click on "remove/add button"
+
+  Scenario: enter text in the field
+    Given Open website "http://the-internet.herokuapp.com/dynamic_controls"
+    Then Check whether "enable/disable button" is "enabled" on a web page
+    Then Click on "enable/disable button"

@@ -37,5 +37,6 @@ public class DynamicControlTest extends DynamicControlPage {
         String text = "Hello";
         addTextOnField(text);
         inputField.shouldHave(value(text));
+
     }
 }

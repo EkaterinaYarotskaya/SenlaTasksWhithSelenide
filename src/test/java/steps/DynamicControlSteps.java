@@ -1,47 +1,56 @@
 package steps;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.WebElement;
+import org.junit.jupiter.api.Assertions;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class DynamicControlSteps {
+    SelenideElement checkBox = $("input[type=checkbox]");
 
-    WebElement checkBox = $("input[type=checkbox]");
-    WebElement removeAndCheckButton = $("#checkbox-example>button");
-    WebElement inputField = $("");
+    SelenideElement inputField = $("input[type=\"text\"]");
+    SelenideElement EnableDisableButton = $("#input-example>button");
 
-    @Then("Check whether an element is displayed on a web page")
-    public void checkWhetherAnElementIsDisplayedOnAWebPage() {
-        checkBox.isDisplayed();
+    @Then("Check whether {string} is {string} on a web page")
+    public void checkWhetherAnElementIsDisplayedAndSelected(String element, String checkTape) {
+        if (element.equals("checkbox")) {
+            if (checkTape.equals("displayed")) {
+                Assertions.assertTrue(checkBox.isDisplayed());
+            } else {
+                if (checkTape.equals("selected")) {
+                    Assertions.assertTrue(checkBox.isSelected());
+                } else throw new RuntimeException("Элемент не найден");
+            }
+        } else {
+//            if(element.equals("checkbox"))
+        }
+
     }
 
-    @Then("Click on check box")
-    public void clickOnCheckBox() {
-        checkBox.click();
-    }
 
-    @Then("Check box is selected on the web page")
-    public void checkBoxIsSelectedOnTheWebPage() {
-        checkBox.isSelected();
-    }
-
-    @Then("Click on remove/add button")
-    public void clickOnRemoveButton() {
-        removeAndCheckButton.click();
-    }
-
-    @Then("Check box is hidden on the web page")
-    public void checkBoxIsHiddenOnTheWebPage() {
-//        checkBox.shouldBe(Condition.hidden, Duration.ofSeconds(15));
-        $("input[type=checkbox]").should(Condition.hidden, Duration.ofSeconds(15));
-    }
-
-    @Then("Check box is visible and exist on the web page")
-    public void checkBoxIsVisibleAndExistOnTheWebPage() {
-        $("input[type=checkbox]").should(Condition.visible, Condition.exist);
-    }
+//    @Then("Click on {string}")
+//    public void clickOn(String buttonName) {
+//
+//        if (buttonName.equals("checkbox")) {
+//            checkBox.click();
+//        } else {
+//            if (buttonName.equals("remove/add button")) {
+//                SelenideElement removeAndCheckButton = $("#checkbox-example>button");
+//
+//                if (checkBox.isDisplayed()) {
+//                    removeAndCheckButton.click();
+//                    checkBox.should(Condition.hidden, Duration.ofSeconds(10));
+//                } else {
+//                    removeAndCheckButton.click();
+//                    checkBox.should(Condition.exist, Condition.visible);
+//                }
+//
+//            } else throw new RuntimeException("Элемент не найден");
+//        }
+//}
 }
+
