@@ -34,11 +34,6 @@ public class DynamicContentSteps {
         } else listOfContentAfter = saveInformationFromThePage();
     }
 
-    @Then("Click on  {string} with selector {string}")
-    public void clickOnButton(String nameButton, String selector) {
-        $(selector).click();
-    }
-
     @And("Checking for dynamic content")
     public void checkingForDynamicContent() {
         Assertions.assertFalse(listOfContentBefore.equals(listOfContentAfter));
