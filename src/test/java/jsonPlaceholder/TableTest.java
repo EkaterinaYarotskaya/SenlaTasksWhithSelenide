@@ -57,8 +57,8 @@ public class TableTest {
         TestClassPageObject tC = new TestClassPageObject();
         open("http://computer-database.gatling.io/computers?p=0&n=10&s=name&d=asc");
         tC.getTable();
+        tC.toStringMethod();
 
-
-        }
     }
 }
+

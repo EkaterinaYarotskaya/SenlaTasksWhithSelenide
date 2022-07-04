@@ -1,10 +1,19 @@
 package jsonPlaceholder;
 
 public class TableDate {
+
+
     private String computerName;
     private String introduced;
     private String discontinued;
     private String company;
+
+    public TableDate(String computerName, String introduced, String discontinued, String company) {
+        this.computerName = computerName;
+        this.introduced = introduced;
+        this.discontinued = discontinued;
+        this.company = company;
+    }
 
     public String getComputerName() {
         return computerName;
