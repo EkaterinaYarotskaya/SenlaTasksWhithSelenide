@@ -7,8 +7,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.function.BooleanSupplier;
-
 public class DynamicControlSteps {
     Pages pages = new Pages();
     SelenideElement element;
@@ -31,6 +29,7 @@ public class DynamicControlSteps {
     public void checkWhetherIsHidden(String fieldName) {
         element = pages.getElementFromPage(fieldName);
         element.should(Condition.hidden);
+
     }
 
     @And("Check whether {string} is exist and visible")
