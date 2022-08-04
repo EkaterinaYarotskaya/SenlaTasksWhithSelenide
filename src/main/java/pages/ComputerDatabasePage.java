@@ -7,8 +7,7 @@ import enums.SortedColumn;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ComputerDatabasePage {
     private SelenideElement computerNameHeader = $(".col-name");
@@ -31,6 +30,10 @@ public class ComputerDatabasePage {
 
     public void openStartPage(int rowsCount) {
         open(String.format("https://computer-database.gatling.io/computers?p=0&n=%s", rowsCount));
+    }
+
+    public int getTableSize() {
+        return $$("tbody >tr").size();
     }
 
     public void sortTableByParameters(SortedColumn sortedColumn, SortType sortType) {

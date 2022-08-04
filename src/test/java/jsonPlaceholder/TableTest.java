@@ -21,16 +21,15 @@ public class TableTest {
     @Test
     public void tenLinesTest() {
         computerDatabasePage.openStartPage();
-        int size = $$("tbody >tr").size();
+        int size = computerDatabasePage.getTableSize();
         Assert.assertEquals(10, size);
     }
 
     @Test
     public void failTenLinesTest() {
         computerDatabasePage.openStartPage();
-        for (int i = $$("tbody>tr").size()-1; i >= 0; i--)
-            executeJavaScript("return document.querySelectorAll('tbody>tr')["+i+"].remove();");
-        int size = $$("tbody >tr").size();
+            executeJavaScript("return document.querySelectorAll('tbody>tr')[0].remove();");
+        int size = computerDatabasePage.getTableSize();
         Assert.assertEquals(9, size);
     }
 
