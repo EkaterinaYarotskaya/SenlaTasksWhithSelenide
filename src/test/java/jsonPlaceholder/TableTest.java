@@ -28,14 +28,14 @@ public class TableTest {
     @Test
     public void failTenLinesTest() {
         computerDatabasePage.openStartPage();
-            executeJavaScript("return document.querySelectorAll('tbody>tr')[0].remove();");
+        executeJavaScript("return document.querySelectorAll('tbody>tr')[0].remove();");
         int size = computerDatabasePage.getTableSize();
         Assert.assertEquals(9, size);
     }
 
     @Test
     public void sortedContentByCompanyTest() throws ParseException {
-        computerDatabasePage.openStartPage(100);
+        computerDatabasePage.openStartPage(500);
         computerDatabasePage.sortTableByParameters(SortedColumn.COMPANY, SortType.ASC);
         List<TableRowDto> list = TableUtils.getTable();
         List<TableRowDto> listSorted = TableUtils.sortList(list, SortedColumn.COMPANY, SortType.ASC);
@@ -44,7 +44,7 @@ public class TableTest {
 
     @Test
     public void sortedContentByCompanyReverseTest() throws ParseException {
-        computerDatabasePage.openStartPage(100);
+        computerDatabasePage.openStartPage(500);
         computerDatabasePage.sortTableByParameters(SortedColumn.COMPANY, SortType.DESC);
         List<TableRowDto> list = TableUtils.getTable();
         List<TableRowDto> listSorted = TableUtils.sortList(list, SortedColumn.COMPANY, SortType.DESC);

@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import enums.SortType;
 import enums.SortedColumn;
 
-import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.*;
 
@@ -14,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class TableUtils {
     private static final SelenideElement nextButton = $("li.next > a");
     private static List<TableRowDto> bigTable = new ArrayList<>();
-    private static final Map<SortedColumn,Comparator<TableRowDto>> sortComparators;
+    private static final Map<SortedColumn, Comparator<TableRowDto>> sortComparators;
 
     static {
         sortComparators = new HashMap<>();
@@ -25,22 +24,21 @@ public class TableUtils {
     }
 
     public static List<TableRowDto> getTable() throws ParseException {
-        for (SelenideElement row : $$("tbody > tr"))
-            bigTable.add(createRawDto(row));
-        turnPage();
-        List<TableRowDto> finalTable = bigTable;
+        boolean status = true;
+        while (status) {
+            for (SelenideElement row : $$("tbody > tr"))
+                bigTable.add(createRawDto(row));
+            if ((nextButton.getAttribute("href") != null))
+                turnPage();
+            else status = false;
+        }
+        List<TableRowDto> finalTable = new ArrayList<>(bigTable);
         bigTable.clear();
         return finalTable;
     }
 
     private static void turnPage() {
-        try {
-            if ((nextButton.getAttribute("href")) != null) {
-                $(nextButton).click();
-                getTable();
-            }
-        } catch (NullPointerException | ParseException ignored) {
-        }
+        $(nextButton).click();
     }
 
     private static TableRowDto createRawDto(SelenideElement tr) throws ParseException {

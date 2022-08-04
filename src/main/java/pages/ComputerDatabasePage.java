@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import enums.SortType;
 import enums.SortedColumn;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ComputerDatabasePage {
     private SelenideElement introducedHeader = $(".col-introduced");
     private SelenideElement discontinuedHeader = $(".col-discontinued");
     private SelenideElement companyHeader = $(".col-company");
-    private Map<SortedColumn, SelenideElement> allHeaders;
+    private final Map<SortedColumn, SelenideElement> allHeaders;
 
     {
         allHeaders = new HashMap<>();
