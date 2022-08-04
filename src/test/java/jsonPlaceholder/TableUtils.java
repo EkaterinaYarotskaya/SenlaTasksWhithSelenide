@@ -56,10 +56,9 @@ public class TableUtils {
     }
 
     public static List<TableRowDto> sortList(List list, SortedColumn columnName, SortType sortType) {
-
         list.sort(sortComparators.get(columnName));
         if (sortType.equals(SortType.DESC))
-            list.sort(Collections.reverseOrder());
+            Collections.reverse(list);
         return list;
     }
 }

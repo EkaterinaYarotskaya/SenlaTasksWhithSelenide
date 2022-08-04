@@ -56,7 +56,6 @@ public class TableTest {
         computerDatabasePage.openStartPage(100);
         computerDatabasePage.sortTableByParameters(SortedColumn.DISCONTINUED, SortType.ASC);
         List<TableRowDto> list = TableUtils.getTable();
-        System.out.println(list.toString());
         List<TableRowDto> listSorted = TableUtils.sortList(list, SortedColumn.DISCONTINUED, SortType.ASC);
         Assertions.assertEquals(list, listSorted);
     }
