@@ -13,11 +13,18 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class TableUtils {
     private static final SelenideElement nextButton = $("li.next > a");
+    private static List<TableRowDto> bigTable = new ArrayList<>();
+    private static final Map<SortedColumn,Comparator<TableRowDto>> sortComparators;
 
-    public static List<TableRowDto> bigTable = new ArrayList<>();
+    static {
+        sortComparators = new HashMap<>();
+        sortComparators.put(SortedColumn.COMPUTER_NAME, Comparator.comparing(TableRowDto::getComputerName));
+        sortComparators.put(SortedColumn.INTRODUCED, Comparator.comparing(TableRowDto::getIntroduced));
+        sortComparators.put(SortedColumn.DISCONTINUED, Comparator.comparing(TableRowDto::getDiscontinued));
+        sortComparators.put(SortedColumn.COMPANY, Comparator.comparing(TableRowDto::getCompany));
+    }
 
     public static List<TableRowDto> getTable() throws ParseException {
-
         for (SelenideElement row : $$("tbody > tr"))
             bigTable.add(createRawDto(row));
         turnPage();
@@ -52,17 +59,7 @@ public class TableUtils {
 
     public static List<TableRowDto> sortList(List list, SortedColumn columnName, SortType sortType) {
 
-        Comparator<TableRowDto> sortByField = null;
-        if (columnName.equals(SortedColumn.COMPUTER_NAME)) {
-            sortByField = Comparator.comparing(TableRowDto::getComputerName);
-        } else if (columnName.equals(SortedColumn.INTRODUCED)) {
-            sortByField = Comparator.comparing(TableRowDto::getIntroduced);
-        } else if (columnName.equals(SortedColumn.DISCONTINUED)) {
-            sortByField = Comparator.comparing(TableRowDto::getDiscontinued);
-        } else if (columnName.equals(SortedColumn.COMPANY)) {
-            sortByField = Comparator.comparing(TableRowDto::getCompany);
-        }
-        list.sort(sortByField);
+        list.sort(sortComparators.get(columnName));
         if (sortType.equals(SortType.DESC))
             list.sort(Collections.reverseOrder());
         return list;
