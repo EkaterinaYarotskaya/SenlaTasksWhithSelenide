@@ -62,4 +62,14 @@ public class TableRowDto {
     public void setCompany(String company) {
         this.company = company;
     }
+
+    @Override
+    public String toString() {
+        return "TableRowDto{" +
+                "computerName='" + computerName + '\'' +
+                ", introduced=" + introduced +
+                ", discontinued=" + discontinued +
+                ", company='" + company + '\'' +
+                '}';
+    }
 }

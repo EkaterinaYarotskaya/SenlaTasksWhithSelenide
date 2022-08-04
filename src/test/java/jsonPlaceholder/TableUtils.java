@@ -12,29 +12,31 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class TableUtils {
-    private final SelenideElement nextButton = $("li.next > a");
+    private static final SelenideElement nextButton = $("li.next > a");
 
-    public List<TableRowDto> bigTable = new ArrayList<>();
+    public static List<TableRowDto> bigTable = new ArrayList<>();
 
-    public List<TableRowDto> getTable() throws ParseException {
+    public static List<TableRowDto> getTable() throws ParseException {
 
         for (SelenideElement row : $$("tbody > tr"))
             bigTable.add(createRawDto(row));
-//        turnPage();
-        return bigTable;
+        turnPage();
+        List<TableRowDto> finalTable = bigTable;
+        bigTable.clear();
+        return finalTable;
     }
 
-    private void turnPage() {
+    private static void turnPage() {
         try {
             if ((nextButton.getAttribute("href")) != null) {
                 $(nextButton).click();
                 getTable();
             }
-        } catch (NullPointerException | ParseException e) {
+        } catch (NullPointerException | ParseException ignored) {
         }
     }
 
-    private TableRowDto createRawDto(SelenideElement tr) throws ParseException {
+    private static TableRowDto createRawDto(SelenideElement tr) throws ParseException {
         List<String> texts = tr.$$("td").texts();
         return new TableRowDto(texts.get(0), texts.get(1), texts.get(2), texts.get(3));
     }
@@ -48,7 +50,7 @@ public class TableUtils {
         }
     }
 
-    public List<TableRowDto> sortList(List list, SortedColumn columnName, SortType sortType) {
+    public static List<TableRowDto> sortList(List list, SortedColumn columnName, SortType sortType) {
 
         Comparator<TableRowDto> sortByField = null;
         if (columnName.equals(SortedColumn.COMPUTER_NAME)) {
